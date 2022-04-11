@@ -2,6 +2,12 @@ from tkinter import *
 
 root= Tk()
 
+
+r1_v = IntVar()
+r1_v.set(1)
+r2_v = StringVar()
+r2_v.set("red")
+
 labelc = Label(root, text ="Crust")
 labelt = Label(root, text ="Toppings")
 labels = Label(root, text ="Sauce")
@@ -11,9 +17,13 @@ labelt.grid(row=0, column = 1)
 labels.grid(row=0, column = 2)
 
 ordercom = ""
-ordercom1 = ""
-ordercom2 = ""
-
+ordercom1 = "Original, "
+ordercom2 = "Red Sauce"
+ordercom3 = ""
+ordercom4 = ""
+ordercom5 = ""
+ordercom0 = ""
+fordercom = ""
 def og():
     global ordercom1
     ordercom1 =" Original,"
@@ -24,65 +34,134 @@ def deep():
     global ordercom1
     ordercom1 =" Deep Dish,"
 
-def pep():
-    global ordercom
-    ordercom = ordercom + " Pepperoni,"
+def pep(count):
+    global ordercom0
+    
 
-def che():
-    global ordercom
-    ordercom = ordercom + " Cheese,"
+    if count == 1:
+        ordercom0 = " Pepperoni,"
+    elif count == 0:
+        ordercom0 = ""
 
-def sa():
-    global ordercom
-    ordercom = ordercom + " Sausage,"
+def che(count):
+    global ordercom3
 
-def veg():
-    global ordercom
-    ordercom = ordercom + "Veggie"
+    if count == 1:
+        ordercom3 = " Cheese,"
+    elif count== 0:
+        ordercom3 = ""
+
+def sa(count):
+    global ordercom4
+
+    if count== 1:
+        ordercom4 = " Sausage,"
+    elif count== 0:
+        ordercom4 = ""
+
+def veg(count):
+    global ordercom5
+    
+    if count == 1:
+        ordercom5 = " Veggie,"
+    elif count == 0:
+        ordercom5 = ""
+
+
+
 
 def red():
     global ordercom2
-    ordercom2 ="Red Sauce"
+    ordercom2 =" Red Sauce"
 
-def og():
+def white():
     global ordercom2
-    ordercom2 ="White Sauce"
+    ordercom2 =" White Sauce"
+
+varp = IntVar()
+varc = IntVar()
+vars = IntVar()
+varv = IntVar()
 
 def finish():
-    fordercom = str(ordercom1) + str(ordercom) + str(ordercom2)
+    one = 1
+    zero = 0
+    global fordercom
+    global ordercom3
+    global ordercom4
+    global ordercom5
+    global ordercom0
+    
+    if varp.get() == 1:
+        pep(one)
+    else:
+        pep(zero)
+    
+    if varc.get() == 1:
+        che(one)
+    else:
+        che(zero)
 
-checkog = Radiobutton(root, text="original", command= og)
-checkhand = Radiobutton(root, text="Handtossed", command= hand)
-checkdeep = Radiobutton(root, text="Deep Dish", command= deep)
+    if vars.get() == 1:
+        sa(one)
+    else:
+        sa(zero)
 
-checkpep = Checkbutton(root, text="Pepperoni", command= pep)
-checkcheese = Checkbutton(root, text="Cheese", command= che)
-checksa = Checkbutton(root, text="Sausage", command= sa)
-checkveg = Checkbutton(root, text="Veggie", command= veg)
+    if varv.get() == 1:
+        veg(one)
+    else:
+        veg(zero)
 
-checkred = Radiobutton(root, text="Red", command= red)
-checkwhite = Radiobutton(root, text="White", command= white)
+
+    fordercom = str(ordercom1) + str(ordercom0)+ str(ordercom3)+ str(ordercom4)+ str(ordercom5) + str(ordercom2)
+    lablecc.configure(text=fordercom)
+    '''
+    checkpep.deselect()
+    checkcheese.deselect()
+    checksa.deselect()
+    checkveg.deselect()
+    ordercom3 = ""
+    ordercom4 = ""
+    ordercom5 = ""
+    ordercom0 = ""
+    '''
+
+
+
+
+
+checkog = Radiobutton(root, text="original", command= og, variable= r1_v, value = 1)
+checkhand = Radiobutton(root, text="Handtossed", command= hand, variable= r1_v, value = 2)
+checkdeep = Radiobutton(root, text="Deep Dish", command= deep, variable= r1_v, value = 3)
+
+checkpep = Checkbutton(root, text="Pepperoni",  variable=varp, onvalue=1, offvalue=0)
+checkcheese = Checkbutton(root, text="Cheese",  variable=varc, onvalue=1, offvalue=0)
+checksa = Checkbutton(root, text="Sausage",  variable=vars, onvalue=1, offvalue=0)
+checkveg = Checkbutton(root, text="Veggie", variable=varv, onvalue=1, offvalue=0)
+
+checkred = Radiobutton(root, text="Red", command= red, variable= r2_v, value = "red")
+checkwhite = Radiobutton(root, text="White", command= white, variable= r2_v, value = "white")
 
 ocbutton = Button(root, text= "Finish", command= finish)
 
 lablec = Label(root, text= "Order Comfirmation:")
 lablecc = Label(root, text=fordercom)
 
-checkog.grid(row= , column= )
-checkhand.grid(row= , column= )
-checkdeep.grid(row= , column= )
+checkog.grid(row=1 , column=0 )
+checkhand.grid(row=2 , column=0 )
+checkdeep.grid(row=3 , column=0 )
 
-checkpep.grid(row= , column= )
-checkcheese.grid(row= , column= )
-checksa.grid(row= , column= )
-checkveg.grid(row= , column= )
+checkpep.grid(row=1 , column=1 )
+checkcheese.grid(row=2 , column=1 )
+checksa.grid(row=3 , column= 1)
+checkveg.grid(row=4 , column= 1)
 
-checkred.grid(row= , column= )
-checkwhite.grid(row= , column= )
+checkred.grid(row=1 , column= 2)
+checkwhite.grid(row=2 , column= 2)
 
-ocbutton.grid(row= , column= )
+ocbutton.grid(row=5 , column= 2)
 
-lablec.grid(row= , column= )
-labelcc.grid(row= , column= )
+lablec.grid(row=6 , column=0 )
+lablecc.grid(row=7 , column=0, columnspan=3)
 root.mainloop()
 
