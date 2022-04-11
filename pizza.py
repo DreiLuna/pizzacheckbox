@@ -8,13 +8,13 @@ r1_v.set(1)
 r2_v = StringVar()
 r2_v.set("red")
 
-labelc = Label(root, text ="Crust")
-labelt = Label(root, text ="Toppings")
-labels = Label(root, text ="Sauce")
+labelc = Label(root, text ="Crust", font=('Arial 15 underline'))
+labelt = Label(root, text ="Toppings", font=('Arial 15 underline'))
+labels = Label(root, text ="Sauce", font=('Arial 15 underline'))
 
 labelc.grid(row= 0, column = 0)
 labelt.grid(row=0, column = 1)
-labels.grid(row=0, column = 2)
+labels.grid(row=0, column = 2, padx=15)
 
 ordercom = ""
 ordercom1 = "Original, "
